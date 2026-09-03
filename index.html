@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)file:///D:/Descargas/gran-concurso-msc.html -->
+<!-- saved from url=(0045)file:///D:/Descargas/gran-concurso-msc_2.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,8 +55,8 @@
 
   main{
     width:100%;
-    max-width:640px;
-    padding: 36px 20px 48px;
+    max-width:840px;
+    padding: 36px 32px 48px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -99,7 +99,7 @@
     background:var(--surface);
     border:3px solid var(--line);
     border-radius:22px;
-    padding:28px 26px 30px;
+    padding:34px 38px 36px;
     box-shadow: 8px 8px 0 var(--card-shadow);
     position:relative;
   }
@@ -107,17 +107,17 @@
   .question{
     font-family:'Poppins', ui-sans-serif, sans-serif;
     font-weight:700;
-    font-size:1.4rem;
+    font-size:1.55rem;
     letter-spacing:-0.005em;
     line-height:1.3;
-    margin:22px 0 22px;
+    margin:22px 0 26px;
     text-wrap:balance;
   }
 
   .options{
     display:grid;
     grid-template-columns: 1fr 1fr;
-    gap:12px;
+    gap:16px;
   }
   @media (max-width: 480px){
     .options{ grid-template-columns: 1fr; }
@@ -164,26 +164,32 @@
   }
 
   .opt:disabled{ cursor:default; }
-  .opt.correct{
+  .opt.pending{
     background:var(--sun);
-    box-shadow: 3px 3px 0 var(--card-shadow);
-    transform:none;
+    box-shadow: 5px 5px 0 var(--card-shadow);
+    transform: translate(-2px,-2px);
   }
-  .opt.correct .badge{ background:var(--ink); color:var(--sun); }
-  .opt.wrong-pick{
+  .opt.locked-other{ opacity:0.55; }
+  .opt.selected{
     background:var(--ink);
     color:var(--surface);
     box-shadow: 3px 3px 0 var(--card-shadow);
     transform:none;
   }
-  .opt.wrong-pick .badge{ background:var(--sun); color:var(--ink); }
-  .opt.faded{ opacity:0.45; }
+  .opt.selected .badge{ background:var(--sun); color:var(--ink); }
 
-  .mark{
+  .picked-tag{
     margin-left:auto;
     font-family:'Space Mono', monospace;
     font-weight:700;
-    font-size:1rem;
+    font-size:0.68rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    background:var(--sun);
+    color:var(--ink);
+    padding:3px 8px;
+    border-radius:999px;
+    flex-shrink:0;
   }
 
   .feedback{
@@ -203,6 +209,63 @@
     margin-bottom:4px;
     font-size:1.05rem;
   }
+
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(13,13,13,0.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:10;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal-box{
+    width:100%;
+    max-width:380px;
+    background:var(--surface);
+    border:3px solid var(--line);
+    border-radius:20px;
+    padding:26px 24px;
+    box-shadow: 8px 8px 0 var(--card-shadow);
+    text-align:center;
+  }
+  .modal-eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+  }
+  .modal-answer{
+    font-family:'Poppins', sans-serif;
+    font-weight:800;
+    font-size:1.2rem;
+    line-height:1.25;
+    margin:0 0 22px;
+    text-wrap:balance;
+  }
+  .modal-actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .modal-btn{
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:12px 16px;
+    border-radius:14px;
+    border:2.5px solid var(--line);
+    cursor:pointer;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .modal-btn:hover{ transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--card-shadow); }
+  .modal-btn:focus-visible{ outline:3px solid var(--ink); outline-offset:2px; }
+  .modal-btn.confirm{ background:var(--sun); color:var(--ink); }
+  .modal-btn.cancel{ background:var(--surface); color:var(--ink); }
 
   .note{
     text-align:center;
@@ -236,29 +299,40 @@
     <p class="question">¿Cómo se llamaba el camarero de <em>Vacaciones en el Mar</em>?</p>
 
     <div class="options" id="options">
-      <button class="opt" data-key="A">
+      <button class="opt selected" data-key="A" disabled="">
         <span class="badge">A</span>
         <span>Isaac Washington</span>
-      </button>
-      <button class="opt" data-key="B">
+      <span class="picked-tag">Tu respuesta</span></button>
+      <button class="opt locked-other" data-key="B" disabled="">
         <span class="badge">B</span>
         <span>Capitán Merrill Stubing</span>
       </button>
-      <button class="opt" data-key="C">
+      <button class="opt locked-other" data-key="C" disabled="">
         <span class="badge">C</span>
         <span>Gopher Smith</span>
       </button>
-      <button class="opt" data-key="D">
+      <button class="opt locked-other" data-key="D" disabled="">
         <span class="badge">D</span>
         <span>Julie McCoy</span>
       </button>
     </div>
 
-    <div class="feedback" id="feedback"></div>
+    <div class="feedback show" id="feedback"><strong>¡Respuesta marcada!</strong>Ahora toca esperar a saber quién se lleva el premio… ¡En unos minutos, otro reto! Estad atent@s.</div>
   </section>
 
-  <p class="note">Esto es solo <b>una prueba de estilo</b>: marca una respuesta para ver cómo reacciona el botón correcto (amarillo) y el incorrecto (negro). Si te gusta el tono, seguimos montando el concurso completo con más preguntas, marcador y ronda final. 🐚</p>
+  <p class="note">Esto es solo <b>una prueba de estilo</b>: marca una respuesta y confirma para ver cómo queda el mensaje de espera. Si te gusta el tono, seguimos montando el concurso completo con más preguntas, marcador y ronda final.</p>
 </main>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <p class="modal-eyebrow">Confirma tu respuesta</p>
+    <p class="modal-answer">¿Marcamos <span id="modalAnswerText">"Isaac Washington"</span>?</p>
+    <div class="modal-actions">
+      <button type="button" class="modal-btn confirm" id="btnConfirm">Sí, la confirmo</button>
+      <button type="button" class="modal-btn cancel" id="btnCancel">Volver a elegir</button>
+    </div>
+  </div>
+</div>
 
 <svg class="waves" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true" style="height:40px;">
   <path d="M0 20 Q 25 0 50 20 T 100 20 T 150 20 T 200 20 T 250 20 T 300 20 T 350 20 T 400 20 T 450 20 T 500 20 T 550 20 T 600 20 V40 H0 Z" fill="var(--ink)"></path>
@@ -267,46 +341,66 @@
 
 <script>
 (function(){
-  var correctKey = 'A';
-  var messages = {
-    correct: '¡Exacto! Isaac Washington serv&iacute;a las copas en el bar del Pacific Princess con m&aacute;s soltura que un mayordomo en alta mar. Punto para ti y otro para el bar libre.',
-    wrong: 'Casi te caes por la borda... la respuesta era la A: <b>Isaac Washington</b>, el camarero de a bordo. Stubing llevaba el timón, Gopher el papeleo y Julie animaba el crucero, pero las copas eran cosa de Isaac.'
-  };
-
   var buttons = Array.prototype.slice.call(document.querySelectorAll('.opt'));
   var feedback = document.getElementById('feedback');
+  var overlay = document.getElementById('modalOverlay');
+  var modalAnswerText = document.getElementById('modalAnswerText');
+  var btnConfirm = document.getElementById('btnConfirm');
+  var btnCancel = document.getElementById('btnCancel');
+
   var answered = false;
+  var pendingBtn = null;
+
+  function openModal(btn){
+    pendingBtn = btn;
+    btn.classList.add('pending');
+    var label = btn.querySelector('span:last-child').textContent;
+    modalAnswerText.textContent = '"' + label + '"';
+    overlay.classList.add('show');
+    btnConfirm.focus();
+  }
+
+  function closeModal(){
+    if(pendingBtn) pendingBtn.classList.remove('pending');
+    pendingBtn = null;
+    overlay.classList.remove('show');
+  }
 
   buttons.forEach(function(btn){
     btn.addEventListener('click', function(){
       if(answered) return;
-      answered = true;
-      var picked = btn.getAttribute('data-key');
-
-      buttons.forEach(function(b){
-        var key = b.getAttribute('data-key');
-        b.disabled = true;
-        if(key === correctKey){
-          b.classList.add('correct');
-          var m = document.createElement('span');
-          m.className = 'mark';
-          m.textContent = '✓';
-          b.appendChild(m);
-        } else if(key === picked){
-          b.classList.add('wrong-pick');
-          var m2 = document.createElement('span');
-          m2.className = 'mark';
-          m2.textContent = '✗';
-          b.appendChild(m2);
-        } else {
-          b.classList.add('faded');
-        }
-      });
-
-      var isCorrect = picked === correctKey;
-      feedback.innerHTML = '<strong>' + (isCorrect ? '¡Acertaste! 🎉' : '¡Casi te pica! 😅') + '</strong>' + (isCorrect ? messages.correct : messages.wrong);
-      feedback.classList.add('show');
+      openModal(btn);
     });
+  });
+
+  btnCancel.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeModal();
+  });
+
+  btnConfirm.addEventListener('click', function(){
+    if(!pendingBtn || answered) return;
+    var chosen = pendingBtn;
+    answered = true;
+    overlay.classList.remove('show');
+
+    buttons.forEach(function(b){
+      b.disabled = true;
+      b.classList.remove('pending');
+      if(b === chosen){
+        b.classList.add('selected');
+        var tag = document.createElement('span');
+        tag.className = 'picked-tag';
+        tag.textContent = 'Tu respuesta';
+        b.appendChild(tag);
+      } else {
+        b.classList.add('locked-other');
+      }
+    });
+
+    feedback.innerHTML = '<strong>¡Respuesta marcada!</strong>Ahora toca esperar a saber qui&eacute;n se lleva el premio&hellip; ¡En unos minutos, otro reto! Estad atent@s.';
+    feedback.classList.add('show');
+    pendingBtn = null;
   });
 })();
 </script>
