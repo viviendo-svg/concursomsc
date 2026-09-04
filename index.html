@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///D:/Descargas/gran-concurso-msc_2.html -->
+<!-- saved from url=(0045)file:///D:/Descargas/gran-concurso-msc_4.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -267,6 +267,151 @@
   .modal-btn.confirm{ background:var(--sun); color:var(--ink); }
   .modal-btn.cancel{ background:var(--surface); color:var(--ink); }
 
+  .next-wrap{
+    display:none;
+    margin-top:20px;
+    padding-top:20px;
+    border-top:2.5px dashed var(--line);
+    text-align:center;
+  }
+  .next-wrap.show{ display:block; }
+  .next-label{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+    margin:0 0 12px;
+  }
+  .unlock-row{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .unlock-input{
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:11px 16px;
+    border-radius:12px;
+    border:2.5px solid var(--line);
+    background:var(--surface);
+    color:var(--ink);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    width:190px;
+    max-width:100%;
+  }
+  .unlock-input::placeholder{ color:var(--ink-soft); text-transform:none; letter-spacing:normal; }
+  .unlock-input:focus-visible{ outline:3px solid var(--ink); outline-offset:1px; }
+  .unlock-btn{
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:0.92rem;
+    padding:11px 20px;
+    border-radius:12px;
+    border:2.5px solid var(--line);
+    background:var(--ink);
+    color:var(--sun);
+    cursor:pointer;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .unlock-btn:hover{ transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--card-shadow); }
+  .unlock-btn:focus-visible{ outline:3px solid var(--ink); outline-offset:2px; }
+  .unlock-error{
+    display:none;
+    margin:10px 0 0;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+  .unlock-error.show{ display:block; }
+
+  .next-btn{
+    display:none;
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:13px 26px;
+    border-radius:999px;
+    border:2.5px solid var(--line);
+    background:var(--sun);
+    color:var(--ink);
+    cursor:pointer;
+    box-shadow: 3px 3px 0 var(--card-shadow);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .next-btn.show{ display:inline-block; }
+  .next-btn:hover{ transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--card-shadow); }
+  .next-btn:focus-visible{ outline:3px solid var(--ink); outline-offset:2px; }
+
+  .hint{
+    font-family:'Karla', sans-serif;
+    font-style:italic;
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    margin:-14px 0 20px;
+  }
+
+  .names-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:12px;
+    margin:0 0 24px;
+  }
+  @media (max-width: 480px){
+    .names-grid{ grid-template-columns: 1fr; }
+  }
+  .name-slot{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .name-slot .num{
+    width:26px; height:26px; flex-shrink:0;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--sun);
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:0.78rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .name-input{
+    flex:1;
+    min-width:0;
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:10px 12px;
+    border-radius:10px;
+    border:2.5px solid var(--line);
+    background:var(--surface);
+    color:var(--ink);
+  }
+  .name-input::placeholder{ color:var(--ink-soft); font-weight:400; }
+  .name-input:focus-visible{ outline:3px solid var(--ink); outline-offset:1px; }
+  .name-input:disabled{ opacity:0.6; }
+
+  .confirm-names-btn{
+    display:block;
+    margin:4px auto 0;
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:13px 30px;
+    border-radius:999px;
+    border:2.5px solid var(--line);
+    background:var(--sun);
+    color:var(--ink);
+    cursor:pointer;
+    box-shadow: 3px 3px 0 var(--card-shadow);
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  }
+  .confirm-names-btn:hover{ transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--card-shadow); }
+  .confirm-names-btn:focus-visible{ outline:3px solid var(--ink); outline-offset:2px; }
+  .confirm-names-btn:disabled{ opacity:0.5; cursor:default; transform:none; box-shadow: 3px 3px 0 var(--card-shadow); }
+
   .note{
     text-align:center;
     font-family:'Space Mono', monospace;
@@ -296,28 +441,63 @@
   </div>
 
   <section class="card">
-    <p class="question">¿Cómo se llamaba el camarero de <em>Vacaciones en el Mar</em>?</p>
+    <div class="q-block" id="q1Content">
+      <p class="question">¿Cómo se llamaba el camarero de <em>Vacaciones en el Mar</em>?</p>
 
-    <div class="options" id="options">
-      <button class="opt selected" data-key="A" disabled="">
-        <span class="badge">A</span>
-        <span>Isaac Washington</span>
-      <span class="picked-tag">Tu respuesta</span></button>
-      <button class="opt locked-other" data-key="B" disabled="">
-        <span class="badge">B</span>
-        <span>Capitán Merrill Stubing</span>
-      </button>
-      <button class="opt locked-other" data-key="C" disabled="">
-        <span class="badge">C</span>
-        <span>Gopher Smith</span>
-      </button>
-      <button class="opt locked-other" data-key="D" disabled="">
-        <span class="badge">D</span>
-        <span>Julie McCoy</span>
-      </button>
+      <div class="options" id="options">
+        <button class="opt" data-key="A">
+          <span class="badge">A</span>
+          <span>Isaac Washington</span>
+        </button>
+        <button class="opt" data-key="B">
+          <span class="badge">B</span>
+          <span>Capitán Merrill Stubing</span>
+        </button>
+        <button class="opt" data-key="C">
+          <span class="badge">C</span>
+          <span>Gopher Smith</span>
+        </button>
+        <button class="opt" data-key="D">
+          <span class="badge">D</span>
+          <span>Julie McCoy</span>
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="next-wrap" id="nextWrap">
+        <p class="next-label">Cuando el anfitrión dé la palabra clave, escríbela aquí:</p>
+        <div class="unlock-row" id="unlockRow">
+          <input type="text" class="unlock-input" id="unlockInput" placeholder="Palabra clave" autocomplete="off">
+          <button type="button" class="unlock-btn" id="unlockBtn">Desbloquear</button>
+        </div>
+        <p class="unlock-error" id="unlockError">Esa palabra no es correcta, prueba otra vez.</p>
+        <button type="button" class="next-btn" id="nextBtn">Siguiente pregunta →</button>
+      </div>
     </div>
 
-    <div class="feedback show" id="feedback"><strong>¡Respuesta marcada!</strong>Ahora toca esperar a saber quién se lleva el premio… ¡En unos minutos, otro reto! Estad atent@s.</div>
+    <div class="q-block" id="q2Content" hidden="">
+      <p class="next-label">Pregunta 2 · respuesta abierta</p>
+      <p class="question">¿Cómo se llamaban los personajes de <em>Verano Azul</em>?</p>
+      <p class="hint">Escribe un nombre en cada casillero, en el orden que te acuerdes.</p>
+
+      <div class="names-grid">
+        <div class="name-slot"><span class="num">1</span><input type="text" class="name-input" placeholder="Nombre 1" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">2</span><input type="text" class="name-input" placeholder="Nombre 2" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">3</span><input type="text" class="name-input" placeholder="Nombre 3" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">4</span><input type="text" class="name-input" placeholder="Nombre 4" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">5</span><input type="text" class="name-input" placeholder="Nombre 5" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">6</span><input type="text" class="name-input" placeholder="Nombre 6" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">7</span><input type="text" class="name-input" placeholder="Nombre 7" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">8</span><input type="text" class="name-input" placeholder="Nombre 8" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">9</span><input type="text" class="name-input" placeholder="Nombre 9" autocomplete="off"></div>
+        <div class="name-slot"><span class="num">10</span><input type="text" class="name-input" placeholder="Nombre 10" autocomplete="off"></div>
+      </div>
+
+      <button type="button" class="confirm-names-btn" id="confirmNamesBtn">Confirmar mis respuestas</button>
+
+      <div class="feedback" id="feedback2"></div>
+    </div>
   </section>
 
   <p class="note">Esto es solo <b>una prueba de estilo</b>: marca una respuesta y confirma para ver cómo queda el mensaje de espera. Si te gusta el tono, seguimos montando el concurso completo con más preguntas, marcador y ronda final.</p>
@@ -326,10 +506,21 @@
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <p class="modal-eyebrow">Confirma tu respuesta</p>
-    <p class="modal-answer">¿Marcamos <span id="modalAnswerText">"Isaac Washington"</span>?</p>
+    <p class="modal-answer">¿Marcamos <span id="modalAnswerText">esta opción</span>?</p>
     <div class="modal-actions">
       <button type="button" class="modal-btn confirm" id="btnConfirm">Sí, la confirmo</button>
       <button type="button" class="modal-btn cancel" id="btnCancel">Volver a elegir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay2">
+  <div class="modal-box">
+    <p class="modal-eyebrow">Confirma tus respuestas</p>
+    <p class="modal-answer">¿Confirmas tus 10 nombres? No podrás editarlos después.</p>
+    <div class="modal-actions">
+      <button type="button" class="modal-btn confirm" id="btnConfirm2">Sí, las confirmo</button>
+      <button type="button" class="modal-btn cancel" id="btnCancel2">Volver a revisar</button>
     </div>
   </div>
 </div>
@@ -347,6 +538,7 @@
   var modalAnswerText = document.getElementById('modalAnswerText');
   var btnConfirm = document.getElementById('btnConfirm');
   var btnCancel = document.getElementById('btnCancel');
+  var nextWrap = document.getElementById('nextWrap');
 
   var answered = false;
   var pendingBtn = null;
@@ -401,6 +593,87 @@
     feedback.innerHTML = '<strong>¡Respuesta marcada!</strong>Ahora toca esperar a saber qui&eacute;n se lleva el premio&hellip; ¡En unos minutos, otro reto! Estad atent@s.';
     feedback.classList.add('show');
     pendingBtn = null;
+
+    nextWrap.classList.add('show');
+  });
+})();
+</script>
+
+<script>
+(function(){
+  // Cambia esta palabra por la que quieras anunciar cuando toque pasar de pregunta.
+  // No distingue mayúsculas/minúsculas ni espacios sobrantes.
+  var UNLOCK_CODE = 'GAVIOTA';
+
+  var unlockRow = document.getElementById('unlockRow');
+  var unlockInput = document.getElementById('unlockInput');
+  var unlockBtn = document.getElementById('unlockBtn');
+  var unlockError = document.getElementById('unlockError');
+  var nextBtn = document.getElementById('nextBtn');
+  var q1Content = document.getElementById('q1Content');
+  var q2Content = document.getElementById('q2Content');
+
+  function tryUnlock(){
+    var typed = (unlockInput.value || '').trim().toUpperCase();
+    if(typed === UNLOCK_CODE){
+      unlockRow.style.display = 'none';
+      unlockError.classList.remove('show');
+      nextBtn.classList.add('show');
+      nextBtn.focus();
+    } else {
+      unlockError.classList.add('show');
+      unlockInput.value = '';
+      unlockInput.focus();
+    }
+  }
+
+  unlockBtn.addEventListener('click', tryUnlock);
+  unlockInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter') tryUnlock();
+  });
+
+  nextBtn.addEventListener('click', function(){
+    q1Content.hidden = true;
+    q2Content.hidden = false;
+    q2Content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var confirmNamesBtn = document.getElementById('confirmNamesBtn');
+  var overlay2 = document.getElementById('modalOverlay2');
+  var btnConfirm2 = document.getElementById('btnConfirm2');
+  var btnCancel2 = document.getElementById('btnCancel2');
+  var inputs = Array.prototype.slice.call(document.querySelectorAll('.name-input'));
+  var feedback2 = document.getElementById('feedback2');
+  var answered2 = false;
+
+  confirmNamesBtn.addEventListener('click', function(){
+    if(answered2) return;
+    overlay2.classList.add('show');
+    btnConfirm2.focus();
+  });
+
+  btnCancel2.addEventListener('click', function(){
+    overlay2.classList.remove('show');
+  });
+  overlay2.addEventListener('click', function(e){
+    if(e.target === overlay2) overlay2.classList.remove('show');
+  });
+
+  btnConfirm2.addEventListener('click', function(){
+    if(answered2) return;
+    answered2 = true;
+    overlay2.classList.remove('show');
+
+    inputs.forEach(function(inp){ inp.disabled = true; });
+    confirmNamesBtn.disabled = true;
+    confirmNamesBtn.style.display = 'none';
+
+    feedback2.innerHTML = '<strong>¡Respuestas registradas!</strong>Ahora toca esperar a saber qui&eacute;n se lleva el premio&hellip; ¡En unos minutos, otro reto! Estad atent@s.';
+    feedback2.classList.add('show');
   });
 })();
 </script>
