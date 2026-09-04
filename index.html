@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///D:/Descargas/gran-concurso-msc_4.html -->
+<!-- saved from url=(0045)file:///D:/Descargas/gran-concurso-msc_5.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -412,6 +412,34 @@
   .confirm-names-btn:focus-visible{ outline:3px solid var(--ink); outline-offset:2px; }
   .confirm-names-btn:disabled{ opacity:0.5; cursor:default; transform:none; box-shadow: 3px 3px 0 var(--card-shadow); }
 
+  .gate-fields{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin:0 0 8px;
+  }
+  .gate-label{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+  .gate-input{
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    padding:12px 14px;
+    border-radius:12px;
+    border:2.5px solid var(--line);
+    background:var(--surface);
+    color:var(--ink);
+    width:100%;
+  }
+  .gate-input::placeholder{ color:var(--ink-soft); font-weight:400; }
+  .gate-input:focus-visible{ outline:3px solid var(--ink); outline-offset:1px; }
+
   .note{
     text-align:center;
     font-family:'Space Mono', monospace;
@@ -440,7 +468,22 @@
     <p>Prueba del concurso · ronda cero</p>
   </div>
 
-  <section class="card">
+  <section class="card" id="nameGateCard">
+    <p class="question">¿Cómo te llamas?</p>
+    <p class="hint">Escribe tu nombre y apellidos para que quede registrada tu participación.</p>
+
+    <div class="gate-fields">
+      <label class="gate-label" for="playerFirstName">Nombre</label>
+      <input type="text" id="playerFirstName" class="gate-input" placeholder="Ej. Vic" autocomplete="given-name">
+      <label class="gate-label" for="playerLastName">Apellidos</label>
+      <input type="text" id="playerLastName" class="gate-input" placeholder="Ej. Aleixandre" autocomplete="family-name">
+    </div>
+    <p class="unlock-error" id="gateError">Escribe al menos tu nombre para continuar.</p>
+    <button type="button" class="confirm-names-btn" id="gateSubmitBtn">Entrar al concurso</button>
+  </section>
+
+  <section class="card" id="quizCard" hidden="">
+    <p class="next-label" id="playerNameLabel" hidden=""></p>
     <div class="q-block" id="q1Content">
       <p class="question">¿Cómo se llamaba el camarero de <em>Vacaciones en el Mar</em>?</p>
 
@@ -517,7 +560,7 @@
 <div class="modal-overlay" id="modalOverlay2">
   <div class="modal-box">
     <p class="modal-eyebrow">Confirma tus respuestas</p>
-    <p class="modal-answer">¿Confirmas tus 10 nombres? No podrás editarlos después.</p>
+    <p class="modal-answer">¿Confirmas tus nombres? No podrás editarlos después.</p>
     <div class="modal-actions">
       <button type="button" class="modal-btn confirm" id="btnConfirm2">Sí, las confirmo</button>
       <button type="button" class="modal-btn cancel" id="btnCancel2">Volver a revisar</button>
@@ -529,6 +572,44 @@
   <path d="M0 20 Q 25 0 50 20 T 100 20 T 150 20 T 200 20 T 250 20 T 300 20 T 350 20 T 400 20 T 450 20 T 500 20 T 550 20 T 600 20 V40 H0 Z" fill="var(--ink)"></path>
 </svg>
 <div class="hazard"></div>
+
+<script>
+(function(){
+  var nameGateCard = document.getElementById('nameGateCard');
+  var quizCard = document.getElementById('quizCard');
+  var firstName = document.getElementById('playerFirstName');
+  var lastName = document.getElementById('playerLastName');
+  var gateError = document.getElementById('gateError');
+  var gateSubmitBtn = document.getElementById('gateSubmitBtn');
+  var playerNameLabel = document.getElementById('playerNameLabel');
+
+  function submitGate(){
+    var fn = (firstName.value || '').trim();
+    var ln = (lastName.value || '').trim();
+    if(!fn){
+      gateError.classList.add('show');
+      firstName.focus();
+      return;
+    }
+    gateError.classList.remove('show');
+
+    var fullName = (fn + ' ' + ln).trim();
+    playerNameLabel.textContent = 'Jugando como ' + fullName;
+    playerNameLabel.hidden = false;
+
+    nameGateCard.hidden = true;
+    quizCard.hidden = false;
+    quizCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  gateSubmitBtn.addEventListener('click', submitGate);
+  [firstName, lastName].forEach(function(input){
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter') submitGate();
+    });
+  });
+})();
+</script>
 
 <script>
 (function(){
